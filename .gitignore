@@ -1,5 +1,7 @@
 obj/
+obj-san/
 moth
+moth-san
 dist/
 
 *.swp

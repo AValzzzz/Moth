@@ -3,10 +3,9 @@
 
 int main() {
     unsigned char buf[SIZE];
-    ssize_t n;
 
     while(1) {
-        n = read(STDIN_FILENO, buf, SIZE);
+        ssize_t n = read(STDIN_FILENO, buf, SIZE);
 
         if (n==0) {
             write(STDOUT_FILENO, "fin de lecture\n", 15);
