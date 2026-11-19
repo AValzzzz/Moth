@@ -1,2 +1,13 @@
 obj/
 moth
+dist/
+
+*.swp
+*~
+.DS_Store
+.vscode/
+.idea/
+
+*.dSYM/
+core
+vgcore.*

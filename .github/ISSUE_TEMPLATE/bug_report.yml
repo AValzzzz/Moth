@@ -1,0 +1,77 @@
+name: Bug report
+description: Something is broken or behaves unexpectedly
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug!
+        For security vulnerabilities, **do not** open an issue: see our [security policy](../../security/policy).
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what went wrong.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Exact keys pressed, file used, etc.
+      placeholder: |
+        1. Run `./moth file.txt`
+        2. Press ...
+        3. See the crash
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Output, crash log or sanitizer report
+      description: Paste any relevant output. It will be formatted as code automatically.
+      render: shell
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      description: Output of `git rev-parse --short HEAD` or the release tag.
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - Linux
+        - macOS
+        - BSD
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: terminal
+    attributes:
+      label: Terminal emulator
+      description: e.g. kitty, alacritty, iTerm2, GNOME Terminal, tmux inside xterm...
+  - type: input
+    id: compiler
+    attributes:
+      label: Compiler
+      description: e.g. gcc 14.2, clang 18
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched existing issues and this is not a duplicate
+          required: true
+        - label: I agree to follow the [Code of Conduct](../../blob/main/CODE_OF_CONDUCT.md)
+          required: true

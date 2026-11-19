@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build (${{ matrix.os }}, ${{ matrix.cc }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        cc: [gcc, clang]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        run: make CC=${{ matrix.cc }}
+
+      - name: Check the binary exists
+        run: test -x ./moth
+
+      - name: Rebuild from scratch
+        run: make re CC=${{ matrix.cc }}
+
+  sanitizers:
+    name: Build with ASan + UBSan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build with sanitizers
+        run: make re CC="gcc -g -fsanitize=address,undefined -fno-omit-frame-pointer"
+
+  static-analysis:
+    name: Static analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install cppcheck
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cppcheck
+
+      - name: Run cppcheck
+        run: |
+          cppcheck --enable=warning,style,performance,portability \
+                   --inconclusive --error-exitcode=1 \
+                   --suppress=missingIncludeSystem \
+                   -I src src/

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/AValzzzz/moth/security/advisories/new
+    about: Please report security issues privately, not through public issues.
+  - name: Questions and discussions
+    url: https://github.com/AValzzzz/moth/discussions
+    about: Ask questions and share ideas here (enable Discussions in the repo settings).
