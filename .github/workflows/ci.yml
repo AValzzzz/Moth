@@ -23,7 +23,7 @@ jobs:
         os: [ubuntu-latest, macos-latest]
         cc: [gcc, clang]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Build
         run: make CC=${{ matrix.cc }}
@@ -38,7 +38,7 @@ jobs:
     name: Build with ASan + UBSan
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Build with sanitizers
         run: make re CC="gcc -g -fsanitize=address,undefined -fno-omit-frame-pointer"
@@ -47,7 +47,7 @@ jobs:
     name: Static analysis
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Install cppcheck
         run: |
